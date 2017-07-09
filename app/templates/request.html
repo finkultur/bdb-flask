@@ -1,0 +1,19 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Let's do this!</h1>
+  <form action="" method="post" name="request" class="basic-grey">
+      {{ form.hidden_tag() }}
+      <p>
+          Enter the url to the first image 
+            {{ form.stringurl(size=40) }}<br>
+          Enter your email (download link gets sent here) 
+            {{ form.email(size=40) }}<br>
+          Enter your username (optional) {{ form.username(size=40) }}<br>
+          Enter your password (optional) {{ form.password(size=40) }}<br>
+      </p>
+      <p>{{ form.save_text }} Save image description</p>
+      <p><input type="submit" value="Make request"></p>
+  </form>
+{% endblock %}
