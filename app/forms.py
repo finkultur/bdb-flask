@@ -10,9 +10,9 @@ class RequestForm(FlaskForm):
                              validators.Regexp("^https?:\/\/dayviews.com")],
                             render_kw={"placeholder": 
                             "http://dayviews.com/user/id_of_first_image/"})
-    email = StringField('email',
-                        [validators.Email("Please enter your email address."),
-                         validators.InputRequired()])
+    #email = StringField('email',
+    #                    [validators.Email("Please enter your email address."),
+    #                     validators.InputRequired()])
     username = StringField('username')
     password = PasswordField('password')
     save_text = BooleanField('save_text', default=True)
