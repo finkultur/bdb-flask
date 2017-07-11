@@ -6,8 +6,11 @@
   <form action="" method="post" name="request" class="basic-grey">
       {{ form.hidden_tag() }}
       <p>
-          Enter the url to the first image 
-            {{ form.stringurl(size=40) }}<br>
+          {% if form.errors['starturl'][0] %}
+              <b>&emsp;Not a correct URL, try again</b><br>
+          {% else %} Enter the URL to the first image
+          {% endif %}
+          {{ form.starturl(size=40) }}<br>
           <!--Enter your email (download link gets sent here) -->
           {#   {{ form.email(size=40) }}<br> #}
           Enter your username (optional) {{ form.username(size=40) }}<br>

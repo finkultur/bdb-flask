@@ -15,7 +15,7 @@ def request():
                            form=form)
 
 def rec(form):
-    url = str(form['stringurl'].data)
+    url = str(form['starturl'].data)
     #email = str(form['email'].data)
     username = str(form['username'].data)
     password = str(form['password'].data)
