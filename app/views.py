@@ -1,12 +1,15 @@
-from flask import flash, render_template, redirect
+from flask import flash, render_template, redirect, request
+from flask_mail import Mail, Message
 from app import app
 from .forms import RequestForm
 
 import uuid
-from bdb_scraper import bdb_scraper
+import bdb_scraper
+
+mail = Mail(app)
 
 @app.route('/', methods=['GET', 'POST'])
-def request():
+def req():
     form = RequestForm()
     if form.validate_on_submit():
         return rec(form)
@@ -14,9 +17,18 @@ def request():
                            title='BDB-Scraper',
                            form=form)
 
+def mail_url(email, url):
+    msg = Message('Your BDB archive is ready',
+                  sender = app.config['MAIL_USERNAME'],
+                  recipients = [email])
+    msg.body = "Here are your pictures: " + url
+    mail.send(msg)
+    pass
+
 def rec(form):
     url = str(form['starturl'].data)
-    #email = str(form['email'].data)
+    email = str(form['email'].data)
+    print(email)
     username = str(form['username'].data)
     password = str(form['password'].data)
     save_text = form['save_text'].data
@@ -32,6 +44,7 @@ def rec(form):
                        zip_name='app/'+zip_path+zip_name,
                        zip_base='files/',
                        dest="files/"+name)
+    mail_url(email, request.url_root+zip_path+zip_name+'.zip')
 
     return render_template('done.html',
                            title='BDB-Scraper',

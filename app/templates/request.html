@@ -6,13 +6,17 @@
   <form action="" method="post" name="request" class="basic-grey">
       {{ form.hidden_tag() }}
       <p>
-          {% if form.errors['starturl'][0] %}
-              <b>&emsp;Not a correct URL, try again</b><br>
+          {% if form.errors and form.errors.starturl %}
+            <b>Not a correct URL, try again</b><br>
           {% else %} Enter the URL to the first image
           {% endif %}
           {{ form.starturl(size=40) }}<br>
-          <!--Enter your email (download link gets sent here) -->
-          {#   {{ form.email(size=40) }}<br> #}
+
+          {% if form.errors and form.errors.email %}
+            <b>Not a correct email, try again</b><br>
+          {% else %} Enter your email (download link gets sent here)
+          {% endif %}
+            {{ form.email(size=40) }}<br>
           Enter your username (optional) {{ form.username(size=40) }}<br>
           Enter your password (optional) {{ form.password(size=40) }}<br>
       </p>

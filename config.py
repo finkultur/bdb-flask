@@ -1,2 +1,8 @@
 WTF_CSRF_ENABLED = True
 SECRET_KEY = 'yozup'
+MAIL_SERVER = 'smtp.gmail.com'
+MAIL_PORT = 465
+MAIL_USERNAME = ''
+MAIL_PASSWORD = ''
+MAIL_USE_TLS = False
+MAIL_USE_SSL = True
